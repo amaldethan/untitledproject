@@ -1,0 +1,124 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper {
+
+	padding-left:0px;
+	padding-right: 0px;
+	overflow: hidden;
+}
+
+.bg-1 {
+
+	
+	background-image: url(../images/classroom.jpg);
+	background-size: cover;
+	height:400px;
+
+}
+
+.homeform {
+	float: right;
+}
+
+.firstrow {
+
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.footerrow {
+
+}
+
+ul.b {
+
+	list-style-type: square;
+}
+
+ul.foot{
+	list-style-type: none;
+	
+}
+
+.textbox {
+
+	border: 1px solid blue;
+	background-color: #DBF1FC;
+}
+
+.trial-button {
+
+	float: right;
+	background-color: teal;
+	color: white;
+}
+
+.secondrow {
+
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.minibox {
+
+	border: 1px solid blue;
+	background-color: #DBF1FC;
+	padding-top: 10px;
+	text-align: center;
+	text-anchor: center;
+	width: auto;
+	height: 75px;
+}
+
+
+
+.linkbox {
+	border: 1px solid black;
+	background-color: snow;
+	width:20%;
+	margin-top: 25px;
+	margin-left: 40%;
+	text-align: center;
+	word-wrap: break-word;
+	
+}
+
+a.footlink {
+
+	color:white;
+}
+
+.mainfoot {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 15px;
+	background-color: #595959;
+
+}
+
+.foot-li {
+	margin-bottom: 5px;
+}
+
+
+@media screen and (max-width: 900px){
+
+	.bg-1 {
+		height:200px;
+	}
+	.sm-right {
+		padding-top: 10px;
+	}
+
+	.mini-col {
+		padding-bottom: 10px;
+	}
+	.minibox {
+		width: 100%;
+	}
+
+}
