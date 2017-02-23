@@ -10,10 +10,22 @@
 		$id = $_POST['qn'];
 		$qn = $_POST['name'];
 		$sol = $_POST['ans'];
+		$score1 = $_POST['score1'];
+		$score2 = $_POST['score2'];
+		$score3 = $_POST['score3'];
+		$netscore = $_POST['netscore'];
 
 		//$JObj = array();
 
-		$JObj = array('id' => $id, 'qn' => $qn, 'ans' => $sol);
+		$JObj = array('id' => $id, 
+			'qn' => $qn, 
+			'ans' => $sol,
+			'score1' => $score1,
+			'score2' => $score2,
+			'score3' => $score3,
+			'netscore' => $netscore
+
+			);
 		
 
 		$JSon = json_encode($JObj, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -21,7 +33,7 @@
 		if(!file_exists($jfile)){
 
 		fopen($jfile, "a+");
-		$FJobj = array('name'=>'test', 'created'=>'today');
+		$FJobj = array($JObj);
 		$Fen = json_encode($FJobj, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 		file_put_contents($jfile, $Fen);
 		$jsondata = file_get_contents($jfile);
@@ -49,7 +61,7 @@
 	$myarr = json_decode($data, true);
 
 	echo $myarr[0]['qn'];
-	*/
+	
 
 
 	
