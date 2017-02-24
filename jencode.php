@@ -36,12 +36,12 @@
 		$FJobj = array($JObj);
 		$Fen = json_encode($FJobj, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 		file_put_contents($jfile, $Fen);
-		$jsondata = file_get_contents($jfile);
+	/*	$jsondata = file_get_contents($jfile);
 		$farray = json_decode($jsondata, true);
 		array_push($farray, $JObj);
 		$exJson = json_encode($farray, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 		file_put_contents($jfile, $exJson);
-
+	*/
 
 		}
 		else {
