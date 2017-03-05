@@ -18,6 +18,15 @@ body {
 
 }
 
+.contain{
+
+			width: auto;
+			height:75%;
+			padding-left: 20px;
+			padding-right: 20px;
+
+		}
+
 .homeform {
 	float: right;
 }
@@ -54,6 +63,12 @@ ul.foot{
 	float: right;
 	background-color: teal;
 	color: white;
+}
+
+.qcol {
+
+	padding-top: 10px;
+	padding-bottom: 15px;
 }
 
 .secondrow {
@@ -121,4 +136,11 @@ a.footlink {
 		width: 100%;
 	}
 
+}
+
+@media (min-width: 768px) {
+
+.col-sm-4 {
+    width: 24.333333%;
+	}
 }
