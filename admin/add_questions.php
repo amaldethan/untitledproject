@@ -3,14 +3,12 @@
 <head>
 
 <?php 
-	include_once("../config.php");
+	include_once("../dbconfig.php");
 	session_start();
-	$tname = $_SESSION['tname'];
-	$query = mysqli_query($conn, 'SELECT * FROM tests WHERE name = "'.$tname.'"');
-	while($result = mysqli_fetch_array($query)){
-
-		$test_id = $result['id'];
-	}
+	$test_id = $_SESSION['id'];
+	$tname = $_SESSION['name'];
+	$count = $_SESSION['count'];
+	
 ?>
 	<title></title>
 
@@ -154,7 +152,27 @@
 		$score_3 = $_POST['score3'];
 		$net_score = $_POST['netscore'];
 
-		if(mysqli_query($conn, "INSERT INTO questions (test_id,qno,question,option_1,option_2,option_3,option_4,answer,score_1,score_2,score_3,net_score)VALUES('$test_id','$qno','$question','$option_1','$option_2','$option_3','$option_4','$answer','$score_1','$score_2','$score_3','$net_score')")){
+		if($answer == 'option_1'){
+
+			$ans = $option_1;
+
+		}
+
+		elseif($answer == 'option_2'){
+
+			$ans = $option_2;
+		}
+
+		elseif($answer == 'option_3'){
+
+			$ans = $option_3;
+		}
+		else {
+
+			$ans = $option_4;
+		}
+
+		if(mysqli_query($conn, "INSERT INTO questions (test_id,qno,question,option_1,option_2,option_3,option_4,answer,score_1,score_2,score_3,net_score)VALUES('$test_id','$qno','$question','$option_1','$option_2','$option_3','$option_4','$ans','$score_1','$score_2','$score_3','$net_score')")){
 
 			?>
 
