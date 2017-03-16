@@ -57,13 +57,13 @@
 
 
 <?php 
-   $sql = "SELECT COUNT(id) AS total FROM questions WHERE test_id = 5";
+   $sql = "SELECT COUNT(id) AS total FROM questions WHERE test_id = $test_id";
    $result = $conn->query($sql);
    $row = $result->fetch_assoc();
    $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
    echo '<ul class="pagination">';
    for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
-   echo "<li><a href='edit_qn.php?id=".$test_id."&page=".$i."'";
+   echo "<li><a href='edit_test.php?id=".$test_id."&page=".$i."'";
    if ($i==$page)  echo " class='curPage'";
    echo ">".$i."</a></li> "; 
    }; 

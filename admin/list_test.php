@@ -33,6 +33,7 @@
 				<th>Subject</th>
 				<th>Chapter</th>
 				<th>Syllabus</th>
+				<th>Type</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -40,11 +41,19 @@
 				$quer = mysqli_query($conn, 'SELECT * FROM tests ORDER BY id DESC');
 				while($res = mysqli_fetch_array($quer)){
 
+					if($res['samp_flag']==0){
+						$type = 'Paid';
+					}
+					else{
+						$type = 'Trial';
+					}
+
 					echo "<tr>";
 					echo "<td>".$res['name']."</td>";
 					echo "<td>".$res['subject']."</td>";
 					echo "<td>".$res['chapter']."</td>";
 					echo "<td>".$res['syllabus']."</td>";
+					echo "<td>".$type."</td>";
 					
 					echo "<td><a href=\"edit_test.php?id=$res[id]\">Edit</a> </td>";
 					echo "</tr>";

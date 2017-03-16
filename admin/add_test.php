@@ -45,6 +45,14 @@
 		</select>
 	</div>
 	<div class="form-group">
+		<select class="w3-select" name="testtype" required="">
+			<option value="" disabled selected>Test Type</option>
+			<option value="0">Paid</option>
+			<option value="1">Trial</option>
+			
+		</select>
+	</div>
+	<div class="form-group">
 		<input class="w3-btn w3-blue w3-round" type="submit" name="submit" id="submit" value="SUBMIT">
 	</div>
 
@@ -61,8 +69,9 @@
 		$sub   = $_POST['subject'];
 		$chap  = $_POST['chapter'];
 		$syll  = $_POST['syllabus'];
+		$ttype = $_POST['testtype'];
 
-		if(mysqli_query($conn, 'INSERT into tests (name,subject,chapter,syllabus) VALUES ("'.$tname.'","'.$sub.'","'.$chap.'","'.$syll.'")')){
+		if(mysqli_query($conn, 'INSERT into tests (name,subject,chapter,syllabus,samp_flag) VALUES ("'.$tname.'","'.$sub.'","'.$chap.'","'.$syll.'","'.$ttype.'")')){
 
 			$query = mysqli_query($conn, 'SELECT * FROM tests ORDER BY id DESC LIMIT 1');
 			while($res = mysqli_fetch_array($query)){
