@@ -5,7 +5,7 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 {
    die('You cannot directly access this page!'); 
 }
-include("../dbconfig.php");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,9 +15,10 @@ include("../dbconfig.php");
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/w3.css">
+	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
+	
 </head>
 <body>
 
@@ -35,71 +36,13 @@ include("../dbconfig.php");
 		</div>
 		<div class="collapse navbar-collapse" id="mynav">		
 		<ul class="nav navbar-nav navbar-right">
-			  <li><a href="dashboard.php">Dashboard</a></li>
+			  <li class="active"><a href="#">Dashboard</a></li>
 		      <li><a href="add_test.php">Add Test</a></li>
 		      <li><a href="list_test.php">List Tests</a></li>
 			  <li><a href="../logout.php">Logout</a></li>
 		</ul>
 		</div>
-</nav>
-<div class="container-fluid" style="margin-top:20px;">
-
-	<table class="w3-table-all w3-hoverable">
-		<thead>
-			<th>Question</th>
-			<th></th>
-			<th></th>
-		</thead>
-	
-
-	<?php 
-		$test_id = $_GET['id'];
-		$results_per_page = 5;
-		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-		$start_from = ($page-1) * $results_per_page;
-		$query = mysqli_query($conn, "SELECT * FROM questions WHERE test_id = $test_id ORDER BY id ASC LIMIT $start_from, $results_per_page ");
-		echo mysqli_error($conn);
-		
-
-
-	
-	//$query = mysqli_query($conn,'SELECT * FROM questions WHERE test_id = "'.$test_id.'" ');
-		while($res = mysqli_fetch_array($query)){
-		
-		$qn = $res['question'];
-		$id = $res['id'];
-
-		echo "<tr>";
-		echo "<td>".$qn."</td>";
-		echo "<td><a href=\"edit_qn.php?id=$id\">Edit</a> </td>";
-		echo "<td><a href=\"del_qn.php?id=$id\">Delete</a> </td>";
-		echo "</tr>";
-	}
-	
-	?>
-
-	</table>
-
-
-
-
-
-<?php 
-   $sql = "SELECT COUNT(id) AS total FROM questions WHERE test_id = $test_id";
-   $result = $conn->query($sql);
-   $row = $result->fetch_assoc();
-   $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
-   echo '<ul class="pagination">';
-   for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
-   echo "<li><a href='edit_test.php?id=".$test_id."&page=".$i."'";
-   if ($i==$page)  echo " class='curPage'";
-   echo ">".$i."</a></li> "; 
-   }; 
-   echo "</ul>"
-   ?>
-
-</div>
-
+	</nav>
 
 <footer class="mainfoot">
 	<div class="container-fluid">

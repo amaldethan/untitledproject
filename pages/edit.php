@@ -38,12 +38,7 @@ $id = $_SESSION['id'];
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/w3.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+   
 
 </head>
 
@@ -51,7 +46,31 @@ $id = $_SESSION['id'];
 
     <div id="wrapper">
 
-        <!-- Navigation -->
+     <nav class="nav navbar-default">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>              
+            </button>
+            <a class="navbar-brand" href="#"><b>B' a whiz</b></a>
+        </div>
+        <div class="collapse navbar-collapse" id="mynav">       
+          <ul class="nav navbar-nav navbar-right">
+
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">Its For You</a></li>
+              <li><a href="#">Test Portfolio</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="../logout.php">Logout</a></li>
+              
+           </ul>
+        </div>
+     </nav>
+
+        
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -62,28 +81,9 @@ $id = $_SESSION['id'];
                 </button>
                 
             </div>
-            <!-- /.navbar-header -->
+            
 
-            <ul class="nav navbar-top-links navbar-right">               
-                
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="../logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+           
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">

@@ -14,9 +14,12 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 <?php 
 	include_once("../dbconfig.php");
 	//session_start();
-	$test_id = $_SESSION['id'];
-	$tname = $_SESSION['name'];
-	$count = $_SESSION['count'];
+	$test_id = $_GET['id'];
+	$select = mysqli_query($conn, 'SELECT * FROM tests WHERE id = "'.$test_id.'"');
+	while($rslt = mysqli_fetch_array($select)){
+		$tname = $rslt['name'];
+	}
+	
 	
 ?>
 	<title></title>
@@ -46,15 +49,15 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 		</div>
 		<div class="collapse navbar-collapse" id="mynav">		
 		<ul class="nav navbar-nav navbar-right">
-			   <li><a href="#">Dashboard</a></li>
-		      <li><a href="#">Add Test</a></li>
-		      <li><a href="#">List Tests</a></li>
+			   <li><a href="dashboard.php">Dashboard</a></li>
+		      <li><a href="add_test.php">Add Test</a></li>
+		      <li><a href="list_test.php">List Tests</a></li>
 			  <li><a href="../logout.php">Logout</a></li>
 		</ul>
 		</div>
 </nav>
 
-<h1><?php echo $tname;?> added. Add questions</h1>
+<h1><?php echo $tname;?> selected. Add questions</h1>
 
 <div class="form-container contain">
 <form method="POST">
@@ -167,7 +170,9 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 	
 </form>
 </div>
-
+<div class="form-group">
+	<a href="../logout.php" role="button" class="w3-btn w3-red">LOGOUT</a>
+</div> 
 
 <?php 
 
@@ -225,12 +230,11 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 	}
 	if(isset($_POST['cancel'])){
-		header('Location: dashboard.php');
+		header('Location: list_test.php');
 	}
 
 
 ?>
-
 
 <footer class="mainfoot">
 	<div class="container-fluid">
@@ -264,5 +268,6 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 </footer>
 
 </div>
+
 </body>
 </html>

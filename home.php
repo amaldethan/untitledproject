@@ -79,7 +79,7 @@ include('dbconfig.php');
 								 			$_SESSION['started'] = true;
 								 			$_SESSION['uname'] = $row['uname'];
 								 			$_SESSION['id'] = $row['id'];
-								 			header('Location: pages/index.php');
+								 			header('Location: home.php');
 								 		}
 								 		else{
 								 			 echo mysqli_error($conn);
@@ -103,10 +103,12 @@ include('dbconfig.php');
         	$uid = $arr['id']; 
 
          ?>
-        	<li class>
+        	<li class=dropdown>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<span class="caret"></span></a>
-          <ul id="login-dp" class="dropdown-menu">
-          	<li><a href="pages/index.php">Dashboard</a></li>
+          <ul id="login-dp-logged" class="dropdown-menu">
+          	<li>
+          	<a href="pages/index.php">Dashboard</a>
+          	</li>
           	<li><a href="logout.php">Logout</a></li>
           </ul>
           </li>
@@ -153,8 +155,28 @@ include('dbconfig.php');
 			<li>Sample Content</li>
 			<li>Sample Content</li>
 		</ul>
-		<button class="btn btn-default trial-button">Take a trial assessment</button>
 
+		<form method="POST">
+		<input type="submit" name="trial" id="trial" class="btn btn-default trial-button" value="Take a trial assessment">
+		</form>
+
+		<?php 
+
+			if(isset($_POST['trial'])){
+				if(!isset($_SESSION['uname'])){ ?>
+
+				<script>
+					alert("Please Login/Register");
+					
+				</script>
+			<?php
+				}
+				else {
+
+					header('Location: tests/start.php');
+				}
+			}
+		?>
 
 	</div>
 	</div>

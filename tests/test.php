@@ -4,13 +4,22 @@ include_once("../dbconfig.php");
 
 ?>
 <html>
+<head>
+	<title></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	
 	<link rel="stylesheet" type="text/css" href="../css/w3.css">
+	<link rel="stylesheet" type="text/css" href="../css/TimeCircles.css">
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-	<script src="ckeditor/ckeditor.js"></script>
+	
+	<script src="../js/TimeCircles.js"></script>
+
+	
 
 	<style type="text/css">
 		input,label{
@@ -23,10 +32,124 @@ include_once("../dbconfig.php");
 			padding-left: 50%;
 			padding-right: 50%;
 		}
+		.example {
+
+			width:25%;
+			height: 25%;
+			float:right;
+		}
 
 	</style>
+</head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid wrapper">
+<nav class="nav navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>				
+			</button>
+			<a class="navbar-brand" href="#"><b>B' a whiz</b></a>
+		</div>
+		<div class="collapse navbar-collapse" id="mynav">		
+		<ul class="nav navbar-nav navbar-right">
+			  <li class="active"><a href="#">Home</a></li>
+		      <li><a href="#">Its For You</a></li>
+		      <li><a href="#">Test Portfolio</a></li>
+		      <li><a href="#">Pricing</a></li>
+		     
+		    <?php 
+		    
+		    if(!isset($_SESSION['uname'])){ ?>  
+
+		      <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
+			<ul id="login-dp" class="dropdown-menu">
+				<li>
+					 <div class="row">
+							<div class="col-md-12">
+								Login via
+								<div class="social-buttons">
+									<a href="social.php?provider=Facebook" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+									<a href="social.php?provider=Google" class="btn btn-tw"><i class="fa fa-google-plus"></i> Google+</a>
+								</div>
+                                or
+								 <form class="form" role="form" method="POST" id="login-nav">
+										<div class="form-group">
+											 <label class="sr-only" for="email">Email address</label>
+											 <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+										</div>
+										<div class="form-group">
+											 <label class="sr-only" for="password">Password</label>
+											 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                             <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+										</div>
+										<div class="form-group">
+											 <input type="submit" class="btn btn-primary btn-block" id="signin" name="signin">Sign in</input>
+										</div>
+										
+								 </form>
+								 <?php
+								 	if(isset($_POST['signin'])){
+
+								 		$email = $_POST['email'];
+								 		$pass = md5($_POST['password']);
+
+								 		$query = mysqli_query($conn, 'SELECT * FROM users WHERE uname = "'.$email.'" AND password = "'.$pass.'"');
+								 		$result = mysqli_fetch_row($query);
+								 		if($result>0){
+								 			$get = mysqli_query($conn, 'SELECT * FROM users WHERE uname = "'.$email.'"');
+								 			$row = mysqli_fetch_array($get);
+								 			$_SESSION['started'] = true;
+								 			$_SESSION['uname'] = $row['uname'];
+								 			$_SESSION['id'] = $row['id'];
+								 			header('Location: pages/index.php');
+								 		}
+								 		else{
+								 			 echo mysqli_error($conn);
+								 		}
+
+								 	} 
+								 ?>
+							</div>
+							<div class="bottom text-center">
+								New here ? <a href="register.php"><b>Sign Up</b></a>
+							</div>
+					 </div>
+				</li>
+			</ul>
+        </li>
+        <?php } else {
+
+        	$name = $_SESSION['uname'];
+        	$check = mysqli_query($conn, 'SELECT * FROM users WHERE uname = "'.$name.'"');
+        	$arr = mysqli_fetch_array($check);
+        	$uid = $arr['id']; 
+
+         ?>
+        	<li class>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<span class="caret"></span></a>
+          <ul id="login-dp" class="dropdown-menu">
+          	<li><a href="../pages/index.php">Dashboard</a></li>
+          	<li><a href="../logout.php">Logout</a></li>
+          </ul>
+          </li>
+        	<?php
+        }
+        ?>
+			</ul>
+        
+		</div>
+
+	</div>
+
+</nav>
+
+<div class="example"></div>
+
 
 	
 
@@ -83,10 +206,10 @@ include_once("../dbconfig.php");
 	</div>
 
 	<div class="form-group" style="float:right;">
-		<input class="w3-btn w3-green w3-round" type="submit" name="submit" id="submit" value="SUBMIT">
+		<input class="w3-btn w3-green w3-round" type="submit" name="submit" id="submit" value="SUBMIT" onclick="resett()">
 	</div>
 	<div class="form-group" style="float:right; margin-right:5px;">
-		<input class="w3-btn w3-grey w3-round" type="submit" name="reset" id="reset" value="RESET">
+		<input class="w3-btn w3-grey w3-round" type="submit" name="reset" id="reset" value="RESET" onclick="resett()">
 	</div>
 
 	</form>
@@ -95,8 +218,15 @@ include_once("../dbconfig.php");
 <?php } 
 		
 		if(isset($_POST['submit'])){
-
+			if(array_key_exists($qid, $_SESSION['answers'])){
+				?> <script type="text/javascript">
+					alert("Already Submitted");
+				</script>
+				<?php
+			}
+			else {
 		$_SESSION['answers'][$qid] = $_POST['ans'];
+			}
 		}
 		if(isset($_POST['reset'])){
 
@@ -114,11 +244,11 @@ $sql = "SELECT COUNT(id) AS total FROM questions WHERE test_id = $test_id";
 
 if($page>1)
 {
-echo "<a href='?id=".$test_id."&page=".($page-1)."' class='w3-button w3-blue' style='margin-right:10px; width:100px;'>PREVIOUS</a>";
+echo "<a href='?id=".$test_id."&page=".($page-1)."' class='w3-button w3-blue' onclick='resett()' style='margin-right:10px; width:100px;'>PREVIOUS</a>";
 }
 if($page!=$total_pages)
 {
-echo "<a href='?id=".$test_id."&page=".($page+1)."' class='w3-button w3-blue' style='width:100px;'>NEXT</a>";
+echo "<a href='?id=".$test_id."&page=".($page+1)."' class='w3-button w3-blue' onclick='resett()' style='width:100px;'>NEXT</a>";
 }
 
 
@@ -128,6 +258,72 @@ echo "<a href='?id=".$test_id."&page=".($page+1)."' class='w3-button w3-blue' st
 	<a href="result.php" role="button" class="w3-btn w3-red">FINISH TEST</a>
 </div>
 
+
+
+<footer class="mainfoot">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<ul class="foot">
+					<li><a class="footlink" href="#">About Us</a></li>
+					<li><a class="footlink" href="#">Terms & Conditions</a></li>
+					<li><a class="footlink" href="#">Pricing</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<ul class="foot">
+					<li><a class="footlink" href="#">Privacy Policy</a></li>
+					<li><a class="footlink" href="#">Refunds</a></li>
+					<li><a class="footlink" href="#">FAQs</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<ul class="foot">
+					<li class="foot-li"><a class="fa fa-facebook-official" href="#" style="font-size: 30px;color: white"></a></li>
+					<li class="foot-li"><a class="fa fa-google-plus-official" href="#" style="font-size: 30px;color: white"></a></li>
+					<li class="foot-li"><a class="fa fa-twitter-square" href="#" style="font-size: 30px;color: white"></a></li>
+				</ul>
+			</div>
+			
+		</div>
+		
+	</div>
+
+</footer>
+
+
 </div>
 </body>
+
+	<script type="text/javascript">
+		var time = localStorage.getItem("time");
+		$(".example").attr('data-timer',time);
+	</script>
+
+<script type="text/javascript">
+		$(".example").TimeCircles({
+			"time": {
+				"Days":{
+					"show":false
+				},
+				"Hours":{
+					"show":false
+				}
+			},
+			"count_past_zero":false
+			
+		})
+		.addListener(
+				function(unit,value,total){
+				if(total<=0){
+					alert("TIme up");
+				}
+			});
+		function resett(){
+		localStorage.removeItem("time");
+		var time = $(".example").TimeCircles().getTime();
+		localStorage.setItem("time", time); 
+	}
+	</script>
 </html>
+

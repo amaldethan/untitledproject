@@ -1,3 +1,8 @@
+<?php 
+ob_start();
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +10,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/w3.css">
+	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="ckeditor/ckeditor.js"></script>
 
@@ -13,115 +20,36 @@
 </head>
 <body>
 
-<div class="form-container">
-<form method="POST">
+<div class="container-fluid">
 	
-	<div class="form-group">
-	<input type="text" class="form-control" name="qn" id="qn" placeholder="Q.No">
-	</div>
-
-	<div class="form-group">
-	<textarea class="form-control" name="name" id="name" placeholder="Question"></textarea>
-	<script>
-	CKEDITOR.replace('name', {
-
-		filebrowserUploadUrl: 'upload.php'
-
-	});	
-
-
-	
-	</script> 
-	</div>
-
-	<div class="form-group">
-	<input type="text" class="form-control" name="ans" id="ans" placeholder="answer">
-	</div>
-
-	<div class="form-group">
-	<input type="text" name="score1" id="score1" class="form-control" placeholder="score 1">
-	</div>
-
-	<div class="form-group">
-	<input type="text" name="score2" id="score2" class="form-control" placeholder="score 2">
-	</div>
-
-	<div class="form-group">
-	<input type="text" name="score3" id="score3" class="form-control" placeholder="score 3">
-	</div>
-
-	<div class="form-group">
-	<input type="text" name="netscore" id="netscore" class="form-control" placeholder="net score">
-	</div>
-
-	<div class="form-group">
-	<input type="submit" class="btn btn-default" name="submit" id="submit">
-	</div>
-
+<form class="w3-container" method="POST">
+<div class="form-group">
+	<input class="w3-input w3-border" type="text" name="username" id="username" placeholder="Username">
+</div>
+<div class="form-group">
+	<input class="w3-input w3-border" type="password" name="password" id="password" placeholder="Password">
+</div>	
+	<input type="submit" class="w3-btn w3-blue" name="login" id="login" value="LOGIN">
 </form>
+
 </div>
 
-<?php
+	<?php 
 
-	
-	$jfile = "test.json";
-	$arr_data = array();
-	$farray = array();
+		if(isset($_POST['login'])){
 
-	if(isset($_POST['submit'])){
+			$uname = $_POST['username'];
+			$pass = $_POST['password'];
 
-		$id = $_POST['qn'];
-		$qn = $_POST['name'];
-		$sol = $_POST['ans'];
-		$score1 = $_POST['score1'];
-		$score2 = $_POST['score2'];
-		$score3 = $_POST['score3'];
-		$netscore = $_POST['netscore'];
+			if($uname == "admin" && $pass == "admin"){
 
-		//$JObj = array();
+				$_SESSION['admin'] = true;
 
-		$JObj = array('id' => $id, 
-			'qn' => $qn, 
-			'ans' => $sol,
-			'score1' => $score1,
-			'score2' => $score2,
-			'score3' => $score3,
-			'netscore' => $netscore
-
-			);
-		
-
-		$JSon = json_encode($JObj, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-	
-		if(!file_exists($jfile)){
-
-		fopen($jfile, "a+");
-		$FJobj = array($JObj);
-		$Fen = json_encode($FJobj, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-		file_put_contents($jfile, $Fen);
-	/*	$jsondata = file_get_contents($jfile);
-		$farray = json_decode($jsondata, true);
-		array_push($farray, $JObj);
-		$exJson = json_encode($farray, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-		file_put_contents($jfile, $exJson);
-	*/
-
-		}
-		else {
-
-			$jsondata = file_get_contents($jfile);
-			$arr_data = json_decode($jsondata, true);
-			array_push($arr_data, $JObj);
-			$exJson = json_encode($arr_data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-			file_put_contents($jfile, $exJson);
+				header('Location: dashboard.php');
+			}
 		}
 
-	
-
-	}
-
-?>
-
+	?>
 
 </body>
 </html>

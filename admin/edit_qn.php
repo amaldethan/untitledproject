@@ -1,10 +1,19 @@
+<?php 
+ob_start();
+session_start();
+if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'] !== true))
+{
+   die('You cannot directly access this page!'); 
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
 
 <?php 
 	include_once("../dbconfig.php");
-	session_start();
+	//session_start();
 	$id = $_GET['id'];
 	//$tname = $_SESSION['name'];
 	//$count = $_SESSION['count'];
@@ -33,10 +42,32 @@
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="ckeditor/ckeditor.js"></script>
+	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 
 </head>
 <body>
 
+<div class="container-fluid wrapper">
+<nav class="nav navbar-default">
+	
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>				
+			</button>
+			<a class="navbar-brand" href="#"><b>B' a whiz Admin</b></a>
+		</div>
+		<div class="collapse navbar-collapse" id="mynav">		
+		<ul class="nav navbar-nav navbar-right">
+			   <li><a href="dashboard.php">Dashboard</a></li>
+		      <li><a href="add_test.php">Add Test</a></li>
+		      <li><a href="list_test.php">List Tests</a></li>
+			  <li><a href="../logout.php">Logout</a></li>
+		</ul>
+		</div>
+</nav>
 
 <div class="w3-container" style="margin-top:20px; margin-bottom:20px;">
 <form method="POST">
@@ -140,10 +171,12 @@
 
 	<div class="form-group">
 	<input type="submit" class="btn btn-success" name="submit" id="submit" value="UPDATE">
+	<input type="submit" class="btn btn-danger" name="cancel" id="cancel" value="CANCEL">
 	</div>
 	
 </form>
 </div>
+ 
 
 <?php 
 
@@ -201,10 +234,45 @@
 
 	}
 
+	if(isset($_POST['cancel'])){
+		header('Location: list_test.php');
+	}
+
 
 ?>
 
+<footer class="mainfoot">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4">
+				<ul class="foot">
+					<li><a class="footlink" href="#">About Us</a></li>
+					<li><a class="footlink" href="#">Terms & Conditions</a></li>
+					<li><a class="footlink" href="#">Pricing</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<ul class="foot">
+					<li><a class="footlink" href="#">Privacy Policy</a></li>
+					<li><a class="footlink" href="#">Refunds</a></li>
+					<li><a class="footlink" href="#">FAQs</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<ul class="foot">
+					<li class="foot-li"><a class="fa fa-facebook-official" href="#" style="font-size: 30px;color: white"></a></li>
+					<li class="foot-li"><a class="fa fa-google-plus-official" href="#" style="font-size: 30px;color: white"></a></li>
+					<li class="foot-li"><a class="fa fa-twitter-square" href="#" style="font-size: 30px;color: white"></a></li>
+				</ul>
+			</div>
+			
+		</div>
+		
+	</div>
 
+</footer>
+
+</div>
 
 </body>
 </html>

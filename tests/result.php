@@ -49,7 +49,7 @@ while($res = mysqli_fetch_array($query)){
 	
 }
 
-echo $total."<br>";
+echo'marks obtained :'.$total."<br>";
 echo 'answered : '.$done.'/'.$max.''."<br>";
 echo 'unanswered : '.$undone.'/'.$max.''."<br>";
 
