@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION['test']) || (isset($_SESSION['test']) && $_SESSION['test'] !== true))
+{
+   die('You cannot directly access this page!'); 
+}
 include_once("../dbconfig.php");
 
 ?>
@@ -32,16 +36,29 @@ include_once("../dbconfig.php");
 			padding-left: 50%;
 			padding-right: 50%;
 		}
+		
 		.example {
-
-			width:25%;
 			height: 25%;
 			float:right;
 		}
 
+		.w3-container {
+
+			margin: auto;
+			width: 75%;
+			margin-top: 20px;
+		}
+
+		@media (min-width: 360px) {
+
+			.example {
+				margin-bottom: 70px;
+			}
+		}
+
 	</style>
 </head>
-<body>
+<body onunload="resett()">
 <div class="container-fluid wrapper">
 <nav class="nav navbar-default">
 	<div class="container-fluid">
@@ -148,9 +165,6 @@ include_once("../dbconfig.php");
 
 </nav>
 
-<div class="example"></div>
-
-
 	
 
 	<?php 
@@ -178,9 +192,12 @@ include_once("../dbconfig.php");
 		
 	
 	?>
+	
 
-	<form class="w3-container w3-border" method="POST">
-		
+	<div class="w3-container w3-border">
+	<div class="example"></div>
+	<form method="POST">
+			
 	<div class="form-group" style="margin-bottom:30px;">
 		<h3><?php echo $qn; ?></h3>
 	</div>
@@ -205,14 +222,14 @@ include_once("../dbconfig.php");
 	<label for="ans"><?php echo $opt4; ?></label>
 	</div>
 
-	<div class="form-group" style="float:right;">
+	<div class="form-group" style="float:left;">
 		<input class="w3-btn w3-green w3-round" type="submit" name="submit" id="submit" value="SUBMIT" onclick="resett()">
 	</div>
-	<div class="form-group" style="float:right; margin-right:5px;">
+	<div class="form-group" style="float:left; margin-left:5px;">
 		<input class="w3-btn w3-grey w3-round" type="submit" name="reset" id="reset" value="RESET" onclick="resett()">
 	</div>
 
-	</form>
+	
 
 	
 <?php } 
@@ -244,16 +261,17 @@ $sql = "SELECT COUNT(id) AS total FROM questions WHERE test_id = $test_id";
 
 if($page>1)
 {
-echo "<a href='?id=".$test_id."&page=".($page-1)."' class='w3-button w3-blue' onclick='resett()' style='margin-right:10px; width:100px;'>PREVIOUS</a>";
+//echo "<a href='?id=".$test_id."&page=".($page-1)."' class='w3-button w3-blue' onclick='resett()' style='margin-right:10px; width:100px;'>PREVIOUS</a>";
 }
 if($page!=$total_pages)
 {
-echo "<a href='?id=".$test_id."&page=".($page+1)."' class='w3-button w3-blue' onclick='resett()' style='width:100px;'>NEXT</a>";
+echo "<a href='?id=".$test_id."&page=".($page+1)."' class='w3-button w3-blue' onclick='resett()' style='width:100px; float:right;'>NEXT</a>";
 }
 
-
+$_SESSION['result'] = true;
 ?>
-
+</form>
+</div>
 <div class="row" id="result">
 	<a href="result.php" role="button" class="w3-btn w3-red">FINISH TEST</a>
 </div>

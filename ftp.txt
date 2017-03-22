@@ -1,0 +1,7 @@
+host : ftp.beawhiztest.esy.es
+
+uname : u688660528
+
+pass : !@#456amal
+
+port : 21

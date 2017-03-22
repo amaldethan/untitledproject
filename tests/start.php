@@ -1,4 +1,8 @@
 <?php session_start();
+if(!isset($_SESSION['test']) || (isset($_SESSION['test']) && $_SESSION['test'] !== true))
+{
+   die('You cannot directly access this page!'); 
+}
 include("../dbconfig.php");
  ?>
 <!DOCTYPE html>

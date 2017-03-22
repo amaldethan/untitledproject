@@ -172,7 +172,7 @@ include('dbconfig.php');
 			<?php
 				}
 				else {
-
+					$_SESSION['test'] = true;
 					header('Location: tests/start.php');
 				}
 			}
