@@ -170,9 +170,7 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 	
 </form>
 </div>
-<div class="form-group">
-	<a href="../logout.php" role="button" class="w3-btn w3-red">LOGOUT</a>
-</div> 
+
 
 <?php 
 
@@ -236,6 +234,8 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 ?>
 
+</div>
+
 <footer class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
@@ -266,8 +266,6 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 	</div>
 
 </footer>
-
-</div>
 
 </body>
 </html>

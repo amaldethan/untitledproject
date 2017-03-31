@@ -241,6 +241,7 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 ?>
 
+</div>
 <footer class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
@@ -272,7 +273,7 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 </footer>
 
-</div>
+
 
 </body>
 </html>

@@ -46,9 +46,9 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 		</div>
 		<div class="collapse navbar-collapse" id="mynav">		
 		<ul class="nav navbar-nav navbar-right">
-			   <li><a href="#">Dashboard</a></li>
-		      <li><a href="#">Add Test</a></li>
-		      <li><a href="#">List Tests</a></li>
+			   <li><a href="dashboard.php">Dashboard</a></li>
+		      <li><a href="add_test.php">Add Test</a></li>
+		      <li><a href="list_test.php">List Tests</a></li>
 			  <li><a href="../logout.php">Logout</a></li>
 		</ul>
 		</div>
@@ -231,7 +231,7 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 ?>
 
-
+</div>
 <footer class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
@@ -263,6 +263,6 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 </footer>
 
-</div>
+
 </body>
 </html>

@@ -1,9 +1,11 @@
-body {
+html, body {
 	font-family: 'Open Sans', sans-serif;
+	height: 100%;
 }
 
 .wrapper {
 
+	min-height: 100vh;
 	padding-left:0px;
 	padding-right: 0px;
 	overflow: hidden;
@@ -129,11 +131,11 @@ a.footlink {
 
 .mainfoot {
 	
-    bottom: 0;
+    
     width: 100%;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	margin-top: 15px;
+	margin-top: 30px;
 	background-color: #595959;
 
 }
@@ -204,6 +206,32 @@ a.footlink {
     color: #fff;
     background-color:#59b5fa;
 }
+
+
+.productbox {
+    background-color:#ffffff;
+	padding:10px;
+	margin-bottom:10px;
+	-webkit-box-shadow: 0 8px 6px -6px  #999;
+	   -moz-box-shadow: 0 8px 6px -6px  #999;
+	        box-shadow: 0 8px 6px -6px #999;
+}
+
+.producttitle {
+    font-weight:bold;
+	padding:5px 0 5px 0;
+}
+
+.productprice {
+	border-top:1px solid #dadada;
+	padding-top:5px;
+}
+
+.pricetext {
+	font-weight:bold;
+	font-size:1.4em;
+}
+
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;

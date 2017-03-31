@@ -17,6 +17,7 @@
 	$loginUrl = $helper->getLoginUrl('http://localhost.com/test/callback.php', $permissions);
 	*/
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +59,7 @@
 
 </nav>
 
-<div class="container-fluid" style="margin-bottom:50px;">
+<div class="container-fluid">
 		
 
 		<div class="row">
@@ -148,8 +149,8 @@
 
 
 
-
-<footer class="mainfoot">
+</div>
+<div class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-4">
@@ -178,8 +179,8 @@
 		
 	</div>
 
-</footer>
-
 </div>
+
+
 </body>
 </html>

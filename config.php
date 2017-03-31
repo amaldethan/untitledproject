@@ -4,14 +4,16 @@
         "providers" => array ( 
             "Google" => array ( 
                 "enabled" => true,
-                "keys"    => array ( "id" => "953576727947-edmpeueufia81o9sk29ev7kc0p7busi7.apps.googleusercontent.com", "secret" => "eN6HNtzDeorO6UnfA9v1kBrr" ), 
+                "keys"    => array ( "id" => "953576727947-edmpeueufia81o9sk29ev7kc0p7busi7.apps.googleusercontent.com", "secret" => "eN6HNtzDeorO6UnfA9v1kBrr" ),
+                 
  
             ),
  
             "Facebook" => array ( 
                 "enabled" => true,
                 "keys"    => array ( "id" => "249016282225554", "secret" => "f0291ada3c20c3489b22cb959b47e695" ),
-                "scope" => "email, user_about_me, user_birthday, user_hometown"  //optional.              
+                "scope" => "email, user_about_me, user_birthday, user_hometown",
+                  //optional.              
             ),
  
             

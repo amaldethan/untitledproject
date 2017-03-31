@@ -53,8 +53,10 @@ $fname = $user['first_name']; // Retrieve user Id
 $lname = $user['last_name']; // Retrieve user name
 $emailid = $user['email'];
 
-mysqli_query($conn, 'INSERT into users(fname,lname,uname) VALUES("'.$fname.'","'.$lname.'","'.$emailid.'")');
-
+//mysqli_query($conn, 'INSERT into users(fname,lname,uname) VALUES("'.$fname.'","'.$lname.'","'.$emailid.'")');
+echo $fname;
+echo $lname;
+echo $emailid;
 $logoutUrl = $helper->getLogoutUrl('{access-token}', 'http://localhost.com');
 echo '<a href="' . $logoutUrl . '">Logout of Facebook!</a>';
 }

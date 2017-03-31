@@ -29,6 +29,39 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 	<script src="../js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../font-awesome/css/font-awesome.min.css">
 
+	<script type="text/javascript">
+    function deleteConfirm(){
+        var result = confirm("Are you sure to delete selected tests ?");
+        if(result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    $(document).ready(function(){
+        $('#select_all').on('click',function(){
+            if(this.checked){
+                $('.checkbox').each(function(){
+                    this.checked = true;
+                });
+            }else{
+                 $('.checkbox').each(function(){
+                    this.checked = false;
+                });
+            }
+        });
+        
+        $('.checkbox').on('click',function(){
+            if($('.checkbox:checked').length == $('.checkbox').length){
+                $('#select_all').prop('checked',true);
+            }else{
+                $('#select_all').prop('checked',false);
+            }
+        });
+    });
+    </script>
+
 </head>
 <body>
 
@@ -55,18 +88,19 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 </nav>
 
 <div class="form-container contain" style="margin-top:20px;">
-	
+	<form name="bulk_action_form" action="del_test.php" method="post" onsubmit="return deleteConfirm();"/>
 	<table class="w3-table-all w3-hoverable">
 
 		<thead>
 			<tr>
 				<th>Name</th>
-				<th>Subject</th>
+				
 				<th>Chapter</th>
-				<th>Syllabus</th>
-				<th>Type</th>
+				
+				
 				<th></th>
 				<th></th>
+				<th>Select All<input type="checkbox" name="select_all" id="select_all" value=""/></th>
 			</tr>
 		</thead>
 			<?php
@@ -86,13 +120,13 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 					echo "<tr>";
 					echo "<td>".$res['name']."</td>";
-					echo "<td>".$res['subject']."</td>";
 					echo "<td>".$res['chapter']."</td>";
-					echo "<td>".$res['syllabus']."</td>";
-					echo "<td>".$type."</td>";
-					
 					echo "<td><a href=\"edit_test.php?id=$res[id]\">Edit</a> </td>";
 					echo "<td><a href=\"add_qn.php?id=$res[id]\">Add</a> </td>";
+
+					?>
+					<td><input type="checkbox" name="checked_id[]" class="checkbox" value=<?php echo $res['id']; ?>></td>
+				<?php	
 					echo "</tr>";
 				}
 
@@ -100,6 +134,9 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 		
 		
 	</table>
+	<br>
+	<input type="submit" class="w3-btn w3-red" name="delete" value="DELETE">
+	</form>
 
 
 <?php 
@@ -119,7 +156,7 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 </div>
  
-
+</div>
 <footer class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
@@ -151,6 +188,6 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 
 </footer>
 
-</div>
+
 </body>
 </html>

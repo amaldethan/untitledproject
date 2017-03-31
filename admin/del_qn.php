@@ -118,6 +118,7 @@ $id = $_GET['id'];
 	}
 
 ?>
+</div>
 <footer class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
@@ -148,6 +149,6 @@ $id = $_GET['id'];
 	</div>
 
 </footer>
-</div>
+
 </body>
 </html>

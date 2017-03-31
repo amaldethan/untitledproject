@@ -147,7 +147,7 @@ include("../dbconfig.php");
 	if(isset($_POST['start'])){
 
 		$_SESSION['answers'] = array();
-		header("Location: test.php?id=10");
+		header("Location: test.php?id=12");
 	}	
 ?>
 </div>

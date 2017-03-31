@@ -100,6 +100,7 @@ include("../dbconfig.php");
 
 </div>
 
+</div>
 
 <footer class="mainfoot">
 	<div class="container-fluid">
@@ -132,7 +133,7 @@ include("../dbconfig.php");
 
 </footer>
 
-</div>
+
 
 </body>
 </html>

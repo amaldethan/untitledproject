@@ -203,38 +203,33 @@ include_once("../dbconfig.php");
 	</div>
 
 	<div class="form-group">
-	<input  type="radio" name="ans" value="<?php echo $opt1; ?>"/>
+	<input  type="radio" name="ans" onchange="this.form.submit()" value="<?php echo $opt1; ?>" <?php if(isset($_POST['ans']) && $_POST['ans'] == $opt1) echo 'checked = "checked"';?>/>
 	<label for="ans"><?php echo $opt1; ?></label>
 	</div>
 
 	<div class="form-group">
-	<input  type="radio" name="ans" value="<?php echo $opt2; ?>"/>
+	<input  type="radio" name="ans" onchange="this.form.submit()" value="<?php echo $opt2; ?>" <?php if(isset($_POST['ans']) && $_POST['ans'] == $opt2) echo 'checked = "checked"';?>/>
 	<label for="ans"><?php echo $opt2; ?></label>
 	</div>
 
 	<div class="form-group">
-	<input  type="radio" name="ans" value="<?php echo $opt3; ?>"/>
+	<input  type="radio" name="ans" onchange="this.form.submit()" value="<?php echo $opt3; ?>" <?php if(isset($_POST['ans']) && $_POST['ans'] == $opt3) echo 'checked = "checked"';?>/>
 	<label for="ans"><?php echo $opt3; ?></label>
 	</div>
 
 	<div class="form-group">
-	<input  type="radio" name="ans" value="<?php echo $opt4; ?>"/>
+	<input  type="radio" name="ans" onchange="this.form.submit()" value="<?php echo $opt4; ?>" <?php if(isset($_POST['ans']) && $_POST['ans'] == $opt4) echo 'checked = "checked"';?>/>
 	<label for="ans"><?php echo $opt4; ?></label>
 	</div>
 
-	<div class="form-group" style="float:left;">
-		<input class="w3-btn w3-green w3-round" type="submit" name="submit" id="submit" value="SUBMIT" onclick="resett()">
-	</div>
-	<div class="form-group" style="float:left; margin-left:5px;">
-		<input class="w3-btn w3-grey w3-round" type="submit" name="reset" id="reset" value="RESET" onclick="resett()">
-	</div>
+	
 
 	
 
 	
 <?php } 
 		
-		if(isset($_POST['submit'])){
+		if(isset($_POST['ans'])){
 			if(array_key_exists($qid, $_SESSION['answers'])){
 				?> <script type="text/javascript">
 					alert("Already Submitted");

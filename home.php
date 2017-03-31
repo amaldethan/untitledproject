@@ -182,7 +182,7 @@ include('dbconfig.php');
 	</div>
 </div>
 
-<div class="row secondrow">
+<div class="row secondrow" style="margin-bottom:20px;">
 	<h2 align="center"><b>Know more about adaptive assessment</b></h2>
 	<div class="col-sm-3 mini-col">
 		<div class="minibox">
@@ -210,6 +210,7 @@ include('dbconfig.php');
 
 </div>
 
+</div>
 <footer class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
@@ -241,6 +242,6 @@ include('dbconfig.php');
 
 </footer>
 
-</div>
+
 </body>
 </html>

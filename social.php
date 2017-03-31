@@ -16,9 +16,13 @@
 			//$logout = $adapter->logout();
 			if($user_profile && isset($user_profile->identifier)){
 
+        $identifier = $user_profile->identifier;
 		$fname = $user_profile->firstName;
         $lname = $user_profile->lastName;
         $emailid = $user_profile->email;
+
+        $_SESSION['identifier'] = $identifier;
+        $_SESSION['emailid'] = $emailid;
 
         $check = mysqli_query($conn, 'SELECT * FROM users WHERE uname = "'.$emailid.'"');
         if(mysqli_fetch_row($check)>0){

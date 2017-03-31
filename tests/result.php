@@ -6,12 +6,14 @@ if(!isset($_SESSION['result']) || (isset($_SESSION['result']) && $_SESSION['resu
    die('You cannot directly access this page!'); 
 }
 
+require_once("jpgraph/jpgraph.php");
 include("../dbconfig.php");
 
 $marks = 0;
 $pen = 0;
 $done = 0;
 $undone = 0;
+$neg = 0;
 
 $test_id = $_SESSION['test_id'];
 $solutions = array();
@@ -28,6 +30,7 @@ while($res = mysqli_fetch_array($query)){
 
 		$pen = $pen + 0.25;
 		$done = $done + 1;
+		
 		
 		}
 
@@ -60,6 +63,11 @@ $wrong = $pen;
 $unanswered = ''.$undone.'/'.$max.'';
 $score = ''.$total.'/'.$max.' ';
 
+$ans_percent = ($total/$max)*100;
+$wrong_percent = ($wrong/$max)*100;
+$unans_percent = ($undone/$max)*100;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +83,7 @@ $score = ''.$total.'/'.$max.' ';
 	<link rel="stylesheet" type="text/css" href="../css/w3.css">
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	
 
 	<script type="text/javascript">
 		localStorage.setItem("time","3600");
@@ -219,6 +228,7 @@ $score = ''.$total.'/'.$max.' ';
 	</table>
 
 </div>
+
 
 <footer class="mainfoot">
 	<div class="container-fluid">

@@ -16,6 +16,7 @@
 
 	if(isset($_GET['provider'])){
 		$provider = $_GET['provider'];
+        $_SESSION['provider'] = $provider;
 		try {
 			$hybridauth = new Hybrid_Auth($config);
 			$authProvider = $hybridauth->authenticate($provider);
@@ -37,6 +38,7 @@
             $id = $res['id'];
             $_SESSION['uname'] = $res['uname'];
             $_SESSION['id'] = $res['id'];
+
             $_SESSION['started'] = true;
 
             }
