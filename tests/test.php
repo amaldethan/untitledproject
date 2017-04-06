@@ -168,13 +168,13 @@ include_once("../dbconfig.php");
 	
 
 	<?php 
-		$test_id = $_GET['id'];
+		$test_id = $_SESSION['test_id'];
 		$results_per_page = 1;
 		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 		$start_from = ($page-1) * $results_per_page;
 		$query = mysqli_query($conn, "SELECT * FROM questions WHERE test_id = $test_id ORDER BY id ASC LIMIT $start_from, $results_per_page ");
 		echo mysqli_error($conn);
-		$_SESSION['test_id'] = $test_id;
+		//$_SESSION['test_id'] = $test_id;
 		
 
 
@@ -260,7 +260,7 @@ if($page>1)
 }
 if($page!=$total_pages)
 {
-echo "<a href='?id=".$test_id."&page=".($page+1)."' class='w3-button w3-blue' onclick='resett()' style='width:100px; float:right;'>NEXT</a>";
+echo "<a href='?page=".($page+1)."' class='w3-button w3-blue' onclick='resett()' style='width:100px; float:right;'>NEXT</a>";
 }
 
 $_SESSION['result'] = true;

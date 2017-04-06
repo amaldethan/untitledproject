@@ -1,6 +1,7 @@
 <?php
 
 require('config.php');
+include('../dbconfig.php');
 
 session_start();
 
@@ -11,6 +12,9 @@ use Razorpay\Api\Errors\SignatureVerificationError;
 $success = true;
 
 $error = "Payment Failed";
+
+$user_id = $_SESSION['user_id'];
+$tpack_id = $_SESSION['tpack_id'];
 
 if (empty($_POST['razorpay_payment_id']) === false)
 {
@@ -38,14 +42,18 @@ if (empty($_POST['razorpay_payment_id']) === false)
 
 if ($success === true)
 {
-    $html = "<p>Your payment was successful</p>
-             <p>Payment ID: {$_POST['razorpay_payment_id']}</p>
-             <p>Order ID: {$_SESSION['razorpay_order_id']}</p>";
+    $payment_id = $_POST['razorpay_payment_id'];
+    if(mysqli_query($conn,'INSERT into orders (payment_id,tpack_id,user_id) VALUES ("'.$payment_id.'","'.$tpack_id.'","'.$user_id.'")')){
+        header('Location: pages/dashboard.php');
+    }
+    else{
+        echo mysqli_error($conn);
+    }
 }
 else
 {
-    $html = "<p>Your payment failed</p>
+    echo "<p>Your payment failed</p>
              <p>{$error}</p>";
 }
 
-echo $html;
+

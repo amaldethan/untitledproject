@@ -141,7 +141,8 @@ $json = json_encode($data);
 								 			$_SESSION['started'] = true;
 								 			$_SESSION['uname'] = $row['uname'];
 								 			$_SESSION['id'] = $row['id'];
-								 			header('Location: home.php');
+								 			header('Location:'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+											
 								 		}
 								 		else{
 								 			 echo mysqli_error($conn);
@@ -163,6 +164,7 @@ $json = json_encode($data);
         	$check = mysqli_query($conn, 'SELECT * FROM users WHERE uname = "'.$name.'"');
         	$arr = mysqli_fetch_array($check);
         	$uid = $arr['id']; 
+        	$_SESSION['user_id'] = $uid;
 
          ?>
         	<li class=dropdown>
@@ -189,7 +191,8 @@ $json = json_encode($data);
 
 	<?php
 
-	$id = $_GET['id']; 
+	$id = $_GET['id'];
+	$_SESSION['tpack_id'] = $id; 
 
 		$query = mysqli_query($conn, 'SELECT * from tpack WHERE id = "'.$id.'"');
 		while($res = mysqli_fetch_array($query)){
@@ -210,7 +213,13 @@ $json = json_encode($data);
   	<h5>Class : <?php echo $grade; ?></h5>
   	<hr>
   	<p>Description about the test</p>
-  	<a id="rzp-button1" role="button" href="razorpay/pay.php" class="w3-button w3-blue w3-hover-green" style="width:100%;">BUY</a>	
+  	<?php if(isset($_SESSION['uname'])){ ?> 
+  	<a id="rzp-button1" role="button" href="razorpay/pay.php" class="w3-button w3-blue w3-hover-green" style="width:100%;">BUY</a>
+  	<?php } else { ?>
+  	<button type="button" class="w3-button w3-grey" disabled style="width:100%;">Sign in to buy</button>
+  	<?php
+  	}
+  	?>	
 	</div>
 	
 	</div>

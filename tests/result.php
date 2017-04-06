@@ -6,7 +6,7 @@ if(!isset($_SESSION['result']) || (isset($_SESSION['result']) && $_SESSION['resu
    die('You cannot directly access this page!'); 
 }
 
-require_once("jpgraph/jpgraph.php");
+
 include("../dbconfig.php");
 
 $marks = 0;
@@ -88,6 +88,7 @@ $unans_percent = ($undone/$max)*100;
 	<script type="text/javascript">
 		localStorage.setItem("time","3600");
 	</script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body>
 
@@ -227,9 +228,113 @@ $unans_percent = ($undone/$max)*100;
 		</tr>
 	</table>
 
+	<?php
+
+	$tpack_id = $_SESSION['tpack_id'];
+	$tid = $_SESSION['test_id'];
+	$uid = $_SESSION['id'];
+
+	$name_query = mysqli_query($conn, "SELECT * FROM tests WHERE id = $tid");
+	while($name_res = mysqli_fetch_array($name_query)){
+
+		$tname = $name_res['name'];
+	}
+
+	$test_name_col = $tname."_score";
+
+	$check = mysqli_query($conn, "SELECT * FROM stats WHERE user_id = $uid AND tpack_id = $tpack_id");
+	if(mysqli_fetch_row($check)>0){
+
+		mysqli_query($conn, 'UPDATE stats SET `'.$test_name_col.'` = '.$total.' WHERE user_id = "'.$uid.'" AND tpack_id = "'.$tpack_id.'"');
+		echo mysqli_error($conn);
+	}
+	else {
+	mysqli_query($conn, 'INSERT into stats (user_id,tpack_id,`'.$test_name_col.'`) VALUES ("'.$uid.'","'.$tpack_id.'","'.$total.'")');
+
+		echo "marks inserted";
+
+	}
+	
+	unset($_SESSION['test']);
+
+	?>
+
+<script type="text/javascript">
+ google.load("visualization", "1", {packages:["corechart"]});
+ google.setOnLoadCallback(drawChart);
+ function drawChart() {
+ var data = google.visualization.arrayToDataTable([
+
+ ['Test','Score'],
+ <?php
+ include("../dbconfig.php"); 
+ $query = "SELECT *  FROM stats WHERE tpack_id = $tpack_id AND user_id = $uid";
+
+ $exec = mysqli_query($conn,$query);
+ while($row = mysqli_fetch_array($exec)){
+
+ 	if($row['test1_score'] == NULL){
+ 		$row['test1_score'] = 0;
+ 	}
+
+ 	if($row['test2_score'] == NULL){
+ 		$row['test2_score'] = 0;
+ 	}
+ 	if($row['test3_score'] == NULL){
+ 		$row['test3_score'] = 0;
+ 	}
+ 	if($row['test4_score'] == NULL){
+ 		$row['test4_score'] = 0;
+ 	}
+ 	if($row['test5_score'] == NULL){
+ 		$row['test5_score'] = 0;
+ 	}
+ 	if($row['test6_score'] == NULL){
+ 		$row['test6_score'] = 0;
+ 	}
+ 	if($row['test7_score'] == NULL){
+ 		$row['test7_score'] = 0;
+ 	}
+ 	if($row['test8_score'] == NULL){
+ 		$row['test8_score'] = 0;
+ 	}
+ 	if($row['test9_score'] == NULL){
+ 		$row['test9_score'] = 0;
+ 	}
+ 	if($row['test10_score'] == NULL){
+ 		$row['test10_score'] = 0;
+ 	}
+
+ echo '["Test 1",'.$row['test1_score'].'],';
+ echo '["Test 2",'.$row['test2_score'].'],';
+ echo '["Test 3",'.$row['test3_score'].'],';
+ echo '["Test 4",'.$row['test4_score'].'],';
+ echo '["Test 5",'.$row['test5_score'].'],';
+ echo '["Test 6",'.$row['test6_score'].'],';
+ echo '["Test 7",'.$row['test7_score'].'],';
+ echo '["Test 8",'.$row['test8_score'].'],';
+ echo '["Test 9",'.$row['test9_score'].'],';
+ echo '["Test 10",'.$row['test10_score'].'],';
+ 
+ }
+ ?>
+ 
+ ]);
+
+ var options = {
+ vAxis: { gridlines: { count: 4 } }
+ };
+ var chart = new google.visualization.ColumnChart(document.getElementById("columnchart"));
+ chart.draw(data, options);
+ }
+ </script>
+
 </div>
 
+<h3>Column Chart</h3>
+ <div id="columnchart" style="width:900px; height:500px;"></div>
 
+</div>
 <footer class="mainfoot">
 	<div class="container-fluid">
 		<div class="row">
@@ -267,6 +372,6 @@ unset($_SESSION['test']);
 
 ?>
 
-</div>
+
 </body>
 </html>

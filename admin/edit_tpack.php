@@ -5,21 +5,17 @@ if(!isset($_SESSION['admin']) || (isset($_SESSION['admin']) && $_SESSION['admin'
 {
    die('You cannot directly access this page!'); 
 }
-
+include("../dbconfig.php");
 $pack_id = $_GET['id'];
+$pack_query = mysqli_query($conn,"SELECT * FROM tpack WHERE id = $pack_id");
+$pack_res = mysqli_fetch_array($pack_query);
+$pack_name = $pack_res['pack_name'];
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 
-<?php 
-	include_once("../dbconfig.php");
-	//session_start();
-	/*$test_id = $_SESSION['id'];
-	$tname = $_SESSION['name'];
-	$count = $_SESSION['count'];
-	*/
-?>
+
 	<title></title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,6 +85,7 @@ $pack_id = $_GET['id'];
 </nav>
 
 <div class="form-container contain" style="margin-top:20px;">
+	<h4><?php echo $pack_name; ?></h4>
 	<form name="bulk_action_form" action="del_test.php" method="post" onsubmit="return deleteConfirm();"/>
 	<table class="w3-table-all w3-hoverable">
 

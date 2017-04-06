@@ -4,6 +4,7 @@ if(!isset($_SESSION['test']) || (isset($_SESSION['test']) && $_SESSION['test'] !
    die('You cannot directly access this page!'); 
 }
 include("../dbconfig.php");
+$tid = $_GET['id'];
  ?>
 <!DOCTYPE html>
 <html>
@@ -147,7 +148,8 @@ include("../dbconfig.php");
 	if(isset($_POST['start'])){
 
 		$_SESSION['answers'] = array();
-		header("Location: test.php?id=12");
+		$_SESSION['test_id'] = $tid;
+		header('Location: test.php');
 	}	
 ?>
 </div>
